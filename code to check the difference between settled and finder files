@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Define the directory where the files are located
-directory_path = r'C:\Users\
+directory_path = r'C:\Users\PragatSingh\OneDrive - PR Petroleum\Daily Fleet Validation'
 
 # Initialize a variable to store the total sum of 'Settled Amount'
 total_settled_amount = 0
