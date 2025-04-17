@@ -1,22 +1,26 @@
 import pandas as pd
 
-# File paths
-file1_path = r'C:\Users\PragatSingh\OneDrive - PR Petroleum\Fleet validation April 16 2025\Settled Transactions_2025-04-17.xlsx'
-file2_path = r'C:\Users\PragatSingh\OneDrive - PR Petroleum\Fleet validation April 16 2025\Transaction Finder_2025-04-17.xlsx'
+# Define the directory where the files are located
+directory_path = r'C:\Users\
 
-# Load the Excel files
-df1 = pd.read_excel(file1_path)
-df2 = pd.read_excel(file2_path)
+# Initialize a variable to store the total sum of 'Settled Amount'
+total_settled_amount = 0
 
-# Calculate the sum of the 'Settled Amount' column in both files
-sum_file1 = df1['Settled Amount'].sum()
-sum_file2 = df2['Settlement Amount'].sum()
+# Iterate through all files in the directory
+for file_name in os.listdir(directory_path):
+    if file_name.endswith('.xlsx'):  # Check if the file is an Excel file
+        file_path = os.path.join(directory_path, file_name)
+        df = pd.read_excel(file_path)
+        if 'Settled Amount' in df.columns:  # Check if the column exists
+            total_settled_amount += df['Settled Amount'].sum()
 
-# Calculate the difference
-difference = sum_file1 - sum_file2
+# Calculate the difference between the total settled amount and sum_file1
+difference = sum_file1 - total_settled_amount
 
 # Round the difference to 2 decimal places
 difference_rounded = round(difference, 2)
 
-# Print the rounded difference
-print(f"Difference in Settled Amount (rounded): {difference_rounded}")
+# Print the results
+print(f"Total Settled Amount in all files: {total_settled_amount}")
+print(f"Difference: {difference}")
+print(f"Difference (rounded): {difference_rounded}")
