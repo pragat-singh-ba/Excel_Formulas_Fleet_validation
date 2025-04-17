@@ -1,0 +1,28 @@
+Excel Formulas
+
+1. For creating the Group Key:
+
+For Finder:
+
+=TRIM(CLEAN(TEXT(Q2, "yyyy-mm-dd ") & TEXT(O2, "hh:mm") & "_" & M2 & "_" & J2))
+(Where Q2=Converted date, O2= transaction time, M2=Authorisation Code, H2=Terminal number)
+
+For settled: 
+
+=TRIM(CLEAN(TEXT(Q2, "yyyy-mm-dd ") & TEXT(M2, "hh:mm") & "_" & K2 & "_" & H2))
+(Where Q2=Converted date, M2=original transaction time, K2=Approval Code, H2=Terminal ID)
+
+2. For Matching:
+
+For Finder:
+
+=IF(COUNTIF(settled!$R$2:$R$66926,R2)>0,1,0) (adjust the Column count accordingly)
+
+For settled:
+
+=IF(COUNTIF(finder!$R$2:$R$65938,R23107)>0,1,0) (adjust the Column count accordingly)
+
+
+for merging the Bulloch transactions
+
+=INDEX('Merged Bulloch'!$Y$2:$Y$2082,MATCH(U2,'Merged Bulloch'!$X$2:$X$2082,0),1)
