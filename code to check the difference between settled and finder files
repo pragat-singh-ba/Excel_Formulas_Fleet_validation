@@ -1,26 +1,30 @@
+import os
 import pandas as pd
 
-# Define the directory where the files are located. you can edit the path for your pc.
-directory_path = r'C:\Users\PragatSingh\OneDrive - PR Petroleum\Daily Fleet Validation'
+# Set your folder path
+folder_path = r'C:\Users\PragatSingh\OneDrive - PR Petroleum\Daily Fleet Validation'
 
-# Initialize a variable to store the total sum of 'Settled Amount'
-total_settled_amount = 0
+# Initialize variables
+total_settled_amounts = []
 
-# Iterate through all files in the directory
-for file_name in os.listdir(directory_path):
-    if file_name.endswith('.xlsx'):  # Check if the file is an Excel file
-        file_path = os.path.join(directory_path, file_name)
-        df = pd.read_excel(file_path)
-        if 'Settled Amount' in df.columns:  # Check if the column exists
-            total_settled_amount += df['Settled Amount'].sum()
+# Loop through all Excel files in the directory
+for file in os.listdir(folder_path):
+    if file.endswith('.xlsx') or file.endswith('.xls'):
+        file_path = os.path.join(folder_path, file)
+        try:
+            df = pd.read_excel(file_path)
+            if 'Settled Amount' in df.columns:
+                settled_sum = df['Settled Amount'].sum()
+                total_settled_amounts.append(settled_sum)
+                print(f"{file}: {settled_sum}")
+            else:
+                print(f"{file}: 'Settled Amount' column not found.")
+        except Exception as e:
+            print(f"Error reading {file}: {e}")
 
-# Calculate the difference between the total settled amount and sum_file1
-difference = sum_file1 - total_settled_amount
-
-# Round the difference to 2 decimal places
-difference_rounded = round(difference, 2)
-
-# Print the results
-print(f"Total Settled Amount in all files: {total_settled_amount}")
-print(f"Difference: {difference}")
-print(f"Difference (rounded): {difference_rounded}")
+# Compare the sums (example: difference between first and last file)
+if len(total_settled_amounts) >= 2:
+    difference = round(abs(total_settled_amounts[0] - total_settled_amounts[-1]), 2)
+    print(f"\nDifference between first and last file's 'Settled Amount': {difference}")
+else:
+    print("\nNot enough valid Excel files with 'Settled Amount' to compare.")
