@@ -1,0 +1,19 @@
+import os
+import pandas as pd
+
+# Load the Excel file
+file_path = r'C:\Users\PragatSingh\OneDrive - PR Petroleum\Combiner ARI.xlsx'
+df = pd.read_excel(file_path, sheet_name='Sheet1')  # change 'Sheet1' if needed
+
+# Remove duplicate rows (keeping the first occurrence)
+# Clean and standardize 'group key' column to avoid hidden issues
+df['group key'] = df['group key'].astype(str).str.strip()
+
+# Drop duplicate rows based on 'group key', keeping only the first occurrence
+df_cleaned = df.drop_duplicates(subset='group key', keep='first')
+
+# Save the cleaned data to a new Excel file
+#df_cleaned.to_excel('cleaned_file.xlsx', index=False)
+df_cleaned.to_excel(r'C:\Users\PragatSingh\OneDrive - PR Petroleum\cleaned_file.xlsx', index=False)
+
+print("Duplicate rows removed. Cleaned file saved as 'cleaned_file.xlsx'")
