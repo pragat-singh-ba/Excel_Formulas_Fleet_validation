@@ -10,7 +10,7 @@ For Finder:
 For settled: 
 
 =TRIM(CLEAN(TEXT(Q2, "yyyy-mm-dd ") & TEXT(M2, "hh:mm") & "_" & K2 & "_" & H2))
-(Where Q2=Converted date, M2=original transaction time, K2=Approval Code, H2=Terminal ID)
+(Where Q2=Converted date, M2=original transaction time, K2=Approval Code, H2=Terminal ID/number)
 
 2. For Matching:
 
