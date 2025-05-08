@@ -2,27 +2,21 @@ Excel Formulas
 
 1. For creating the Group Key:
 
-For Finder:
+for output
+=TRIM(CLEAN(TEXT(A2, "yyyy-mm-dd ") & TEXT(A2, "hh:mm") & "_" & P2 & "_" & I2))
+=IF(COUNTIF(,R2)>0,1,0)
 
-=TRIM(CLEAN(TEXT(Q2, "yyyy-mm-dd ") & TEXT(O2, "hh:mm") & "_" & M2 & "_" & J2))
-(Where Q2=Converted date, O2= transaction time, M2=Authorisation Code, H2=Terminal number)
+for gp
+=TRIM(CLEAN(TEXT(L2, "yyyy-mm-dd ") & TEXT(M2, "hh:mm") & "_" & K2 & "_" & H2))
+=IF(COUNTIF(,P2)>0,1,0)
 
-For settled: 
+yyyy-mm-dd HH:MM:SS
+=TEXT(L2, "yyyy-mm-dd")
+=VALUE(P2)
 
-=TRIM(CLEAN(TEXT(Q2, "yyyy-mm-dd ") & TEXT(M2, "hh:mm") & "_" & K2 & "_" & H2))
-(Where Q2=Converted date, M2=original transaction time, K2=Approval Code, H2=Terminal ID/number)
+column sequence for creating GP_key should be like this: 
+for GP - yyyy-mm-dd + hh:mm + approval code + Terminal number
+for accounting raw/ output - yyyy-mm-dd hh:mm + approval code + Terminal number
 
-2. For Matching:
-
-For Finder:
-
-=IF(COUNTIF(settled!$R$2:$R$66926,R2)>0,1,0) (adjust the Column count accordingly)
-
-For settled:
-
-=IF(COUNTIF(finder!$R$2:$R$65938,R23107)>0,1,0) (adjust the Column count accordingly)
-
-
-for merging the Bulloch transactions
-
-=INDEX('Merged Bulloch'!$Y$2:$Y$2082,MATCH(U2,'Merged Bulloch'!$X$2:$X$2082,0),1)
+column headers for upload to gp merchant spreadsheet
+Merchant Number	Merchant Name	Original Transaction Amount	Original Transaction Amount Currency	Transaction Type	Payment Method	Card Number	Terminal Number	Settlement Amount	Settlement Amount Currency	Authorization Code	Transaction Date	Transaction Time	File Date	File Time
