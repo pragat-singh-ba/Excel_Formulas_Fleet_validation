@@ -20,3 +20,17 @@ for accounting raw/ output - yyyy-mm-dd hh:mm + approval code + Terminal number
 
 column headers for upload to gp merchant spreadsheet
 Merchant Number	Merchant Name	Original Transaction Amount	Original Transaction Amount Currency	Transaction Type	Payment Method	Card Number	Terminal Number	Settlement Amount	Settlement Amount Currency	Authorization Code	Transaction Date	Transaction Time	File Date	File Time
+
+=A2 + TIMEVALUE(B2)
+to combine date and time in one column
+
+to find the client name and driver name for canco xpress
+=INDEX('GP Bulloch'!$K$2:$K$2131,MATCH(S10,'GP Bulloch'!$T$2:$T$2131,0),1)
+
+=IF(COUNTIF(GP Infonet!$M$2:$M$2,#REF!)>0,1,0)
+
+MERGED AMOUNT
+=INDEX(Merged Infonet!$K$2:$K$2,MATCH(M2,Merged Infonet!$N$2:$N$2,0),1)
+
+MATCH VALUE
+=IF(P2=K2,1,0)
