@@ -24,9 +24,6 @@ Merchant Number	Merchant Name	Original Transaction Amount	Original Transaction A
 =A2 + TIMEVALUE(B2)
 to combine date and time in one column
 
-to find the client name and driver name for canco xpress
-=INDEX('GP Bulloch'!$K$2:$K$2131,MATCH(S10,'GP Bulloch'!$T$2:$T$2131,0),1)
-
 =IF(COUNTIF(GP Infonet!$M$2:$M$2,#REF!)>0,1,0)
 
 MERGED AMOUNT
@@ -34,3 +31,10 @@ MERGED AMOUNT
 
 MATCH VALUE
 =IF(P2=K2,1,0)
+
+to find the client name and driver name for canco xpress
+to find client name
+=XLOOKUP(B2, Sheet2!A:A, Sheet2!B:B, "Not Found")
+
+to find card number
+=XLOOKUP(B2, Sheet2!A:A, Sheet2!C:C, "Not Found")
